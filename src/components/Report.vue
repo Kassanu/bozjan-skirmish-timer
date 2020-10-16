@@ -37,7 +37,8 @@
                         name: item.name,
                         averages: {
                             spawnToSpawn: 0,
-                            killToSpawn: 0
+                            killToSpawn: 0,
+                            enemyKills: 0
                         },
                         timings: []
                     }
@@ -47,8 +48,10 @@
                             spawn: time[0],
                             kill: time[1],
                             sinceLastSpawn: null,
-                            sinceLastKill: null
+                            sinceLastKill: null,
+                            enemyKills: time[2] || 0
                         }
+                        card.averages.enemyKills += timeObject.enemyKills
                         if (index > 0) {
                             let lastTime = card.timings[card.timings.length - 1]
                             if (timeObject.spawn && lastTime.spawn) {
@@ -66,6 +69,7 @@
                     if (timings.length > 1) {
                         card.averages.spawnToSpawn = card.averages.spawnToSpawn / (timings.length-1)
                         card.averages.killToSpawn = card.averages.killToSpawn / (timings.length-1)
+                        card.averages.enemyKills = card.averages.enemyKills / timings.length
                     }
 
                     report.push(card)
