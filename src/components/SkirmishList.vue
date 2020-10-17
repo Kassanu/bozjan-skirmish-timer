@@ -5,14 +5,16 @@
         <Report v-show="showReport" :list="fullList" :timings="timings" />
         <div v-show="!showReport">
             <div style="display: flex; justify-content: center;">
-                <div>
-                    <SkirmishTimer v-for="item in list[0]" :key="item.id" :item="item" @logState="logState" />
-                </div>
-                <div>
-                    <SkirmishTimer v-for="item in list[1]" :key="item.id" :item="item" @logState="logState" />
-                </div>
-                <div>
-                    <SkirmishTimer v-for="item in list[2]" :key="item.id" :item="item" @logState="logState" />
+                <div style="display: flex; justify-content: flex-start; align-items: self-start;">
+                    <div style="display: flex;width: 500px;flex-wrap: wrap;align-items: self-start; margin-right: 1em">
+                        <SkirmishTimer v-for="item in list[0]" :key="item.id" :item="item" @logState="logState" style="flex: 0 50%;" />
+                    </div>
+                    <div style="display: flex;width: 500px;flex-wrap: wrap;align-items: self-start; margin-right: 1em">
+                        <SkirmishTimer v-for="item in list[1]" :key="item.id" :item="item" @logState="logState" style="flex: 0 50%;" />
+                    </div>
+                    <div style="display: flex;width: 500px;flex-wrap: wrap;align-items: self-start; margin-right: 1em">
+                        <SkirmishTimer v-for="item in list[2]" :key="item.id" :item="item" @logState="logState" style="flex: 0 50%;" />
+                    </div>
                 </div>
             </div>
         </div>

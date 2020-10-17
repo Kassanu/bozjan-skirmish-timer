@@ -1,6 +1,6 @@
 <template>
-    <div style="border: 1px solid grey; margin-bottom: 1em; width: 250px" :class="backgroundColor">
-        <div>{{ item.name }}</div>
+    <div style="border: 1px solid grey; margin-bottom: .75em;height:125px;" :class="backgroundColor">
+        <div style="height: 35px">{{ item.name }}</div>
         <button @click="logState" style="margin-right: 1em;width: 100%; padding-top:1rem; padding-bottom:1rem;">{{ buttonLabel }}</button>
         <div style="padding: 1rem 0">{{ timeLabel }}</div>
     </div>
