@@ -3,6 +3,9 @@
         <button @click="saveJson">
             Save
         </button>
+        <button @click="reloadChart">
+            Reload Chart
+        </button>
         <div style="width: 75%">
             <ReportChart :series="series" :key="chartVersion" />
         </div>
@@ -124,6 +127,9 @@
             }
         },
         methods: {
+            reloadChart() {
+                this.chartVersion += 1
+            },
             saveJson() {
                 let a = document.createElement("a");
                 let file = new Blob([JSON.stringify(this.report, null, 4)], { type: 'application/json' });

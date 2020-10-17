@@ -1,16 +1,17 @@
 <template>
-    <div>
-        <SkirmishList :list="skirmishes" />
+    <div style="width: 100%">
+        <input type="file" accept=".json" @change="upload">
+        <Report :list="fullList" :timings="timings" />
     </div>
 </template>
 
 <script>
-    import SkirmishList from './SkirmishList.vue'
+    import Report from './Report.vue'
 
     export default {
-        name: 'Main',
+        name: 'ViewReport',
         components: {
-            SkirmishList
+            Report
         },
         data() {
             return {
@@ -215,7 +216,42 @@
                             name: "The Battle of Castrum Lacus Litore"
                         }
                     ]
-                ]
+                ],
+                timings: {},
+
+            }
+        },
+        computed: {
+            fullList() {
+                return this.skirmishes[0].concat(this.skirmishes[1]).concat(this.skirmishes[2]).concat(this.skirmishes[3])
+            }
+        },
+        methods: {
+            upload(e) {
+                let file = e.target.files[0]
+                if (!file) {
+                    return
+                }
+                let reader = new FileReader()
+                reader.onloadend = (e) => {
+                    let contents = e.target.result;
+                    this.parseReportTimings(JSON.parse(contents))
+                }
+                reader.readAsText(file)
+            },
+            parseReportTimings(report) {
+                let timings = {}
+                report.forEach(skirmish => {
+                    let times = []
+                    skirmish.timings.forEach((timing) => {
+                        times.push([
+                            new Date(timing.spawn),
+                            new Date(timing.kill)
+                        ])
+                    })
+                    timings = Object.assign(timings, {[skirmish.id]: times})
+                })
+                this.timings = timings
             }
         }
     }
